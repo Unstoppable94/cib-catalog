@@ -1,5 +1,5 @@
-name: elasticsearch2.x
+name: elasticsearch 5.3.1
 description: |
-  elasticsearch2.x
-version: v2.4.3
-category: elasticsearch2.x
+  elasticsearch 5 with docker log and systemd log collect,kibana
+version: v5.3.1
+category: elasticsearch5
