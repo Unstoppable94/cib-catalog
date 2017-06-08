@@ -12,7 +12,7 @@ version: '2'
     default: "0.0.0.0"
     required: false
     type: "string"
-- variable: "RANCHER_SERVER_REAL_IP_1"
+  - variable: "RANCHER_SERVER_REAL_IP_1"
     label: "Rancher Server ip 1"
     description: "IP Address of the rancher server"
     default: "0.0.0.0"
