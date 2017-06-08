@@ -37,9 +37,6 @@ services:
       io.rancher.container.dns: 'true'
   prometheus-rancher-exporter:
     image: infinityworks/prometheus-rancher-exporter:v0.22.52
-#    environment:
-#      CATTLE_URL: http://192.168.101.101/v2-beta
-#      CATTLE_CONFIG_URL: http://192.168.101.101/v2-beta
     tty: true
     labels:
       io.rancher.container.agent.role: environment
@@ -56,12 +53,10 @@ services:
     - node-exporter:node-exporter
     - cadvisor:cadvisor
     - prometheus-rancher-exporter:prometheus-rancher-exporter
-
     ports:
     - 9090:9090/tcp
     command:
     - -alertmanager.url=http://alertmanager:9093
-#    - -config.file=/root/prometheus.yml
     -config.file=/etc/prometheus/prometheus.yml
     - -storage.local.path=/prometheus
     - -web.console.libraries=/etc/prometheus/console_libraries
