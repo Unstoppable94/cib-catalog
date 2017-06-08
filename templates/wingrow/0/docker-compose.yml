@@ -1,0 +1,39 @@
+version: '2'
+services:
+  jenkins:
+    privileged: true
+    image: 10.0.2.50/jenkins/wingrow-dind:v3.6
+    ports: 
+    - "${JenkinsPort}:8080"
+    - "${WinGrowPort}:18080"
+    links:
+    - sonar:SonarHost
+    volumes:
+    - /var/lib/jenkins
+    - /root/.m2:/root/.m2
+    labels: 
+      io.rancher.container.pull_image: always
+    stdin_open: true
+    tty: true
+  sonar:
+    image: 10.0.2.50/library/sonarqube:5.5
+    ports: 
+    - "${SonarPort}:9000"
+    labels: 
+      io.rancher.container.pull_image: always
+    stdin_open: true
+    tty: true
+  gitlab: 
+    image: 10.0.2.50/gitlab/gitlab-ce:8.16.3-ce.1
+    ports: 
+    - "${GitlabHttpPort}:80"
+    - "${GitlabHttpsPort}:443"
+    - "${GitlabSSHPort}:22"
+    volumes:
+    - ${volume_gitlab_config}:/etc/gitlab
+    - ${volume_gitlab_log}:/var/log/gitlab
+    - ${volume_gitlab_data}:/var/opt/gitlab
+    labels: 
+      io.rancher.container.pull_image: always
+    stdin_open: true
+    tty: true
