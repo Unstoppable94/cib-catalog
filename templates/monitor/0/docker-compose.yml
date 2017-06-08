@@ -1,64 +1,81 @@
 version: '2'
 services:
-  dockerlog-fluentd:
-    privileged: true
-    image: winhong/dockerlog-fluentd
+  node-exporter:
+    image: prom/node-exporter:latest
     stdin_open: true
-    volumes:
-    - /var/lib/docker:/var/lib/docker:ro
-    - /var/log/fluentd:/var/log/fluentd
+    network_mode: host
     tty: true
-    pid: host
-    user: root
     labels:
-      io.rancher.container.pull_image: always
       io.rancher.scheduler.global: 'true'
-  elasticsearch-clients:
-    image: winhong/wh-elasticsearch
-    environment:
-      XPACK_SECURITY_ENABLED: 'true'
-    stdin_open: true
-    volumes:
-    - /var/lib/winhong/elasticsearch/client-data:/usr/share/elasticsearch/data:z
+      io.rancher.container.dns: 'true'
+  grafana:
+    image: grafana/grafana
     tty: true
+    links:
+    - prometheus:prometheus
+    - prometheus-rancher-exporter:prometheus-rancher-exporter
+    volumes_from:
+    - graf-db
     ports:
-    - 9200:9200/tcp
-    user: root
+    - 3000:3000/tcp
     labels:
-      io.rancher.container.hostname_override: container_name
-      io.rancher.container.pull_image: always
-      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-clients
-  systemd-fluentd:
-    privileged: true
-    image: winhong/systemd-fluentd
+      io.rancher.sidekicks: graf-db
+  rancher-server-ip:
+    image: rancher/external-service
+  cadvisor:
+    image: google/cadvisor:latest
     stdin_open: true
+    network_mode: host
     volumes:
-    - /var/log/fluentd:/var/log/fluentd:rw
-    - /run/log/journal:/run/log/journal
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
     tty: true
-    pid: host
-    user: root
     labels:
-      io.rancher.container.pull_image: always
       io.rancher.scheduler.global: 'true'
-  kibana-5:
-    image: winhong/wh-kibana
-    environment:
-      XPACK_SECURITY_ENABLED: 'true'
-    stdin_open: true
+      io.rancher.container.dns: 'true'
+  prometheus-rancher-exporter:
+    image: infinityworks/prometheus-rancher-exporter:v0.22.52
+#    environment:
+#      CATTLE_URL: http://192.168.101.101/v2-beta
+#      CATTLE_CONFIG_URL: http://192.168.101.101/v2-beta
     tty: true
-    ports:
-    - 5601:5601/tcp
     labels:
-      io.rancher.container.pull_image: always
-  elasticsearch-masters:
-    image: winhong/wh-elasticsearch
-    stdin_open: true
+      io.rancher.container.agent.role: environment
+      io.rancher.container.create_agent: 'true'
+  prometheus:
+    image: winhong/prometheus
     volumes:
-    - /var/lib/winhong/elasticsearch/master-data:/usr/share/elasticsearch/data:z
+    - /data/
+    - /root/prometheus.yml:/root/prometheus.yml
     tty: true
-    labels:
-      io.rancher.container.hostname_override: container_name
-      io.rancher.container.pull_image: always
-      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-masters
+    extra_hosts:
+    - rancher-server:${RANCHER_SERVER}
+    links:
+    - node-exporter:node-exporter
+    - cadvisor:cadvisor
+    - prometheus-rancher-exporter:prometheus-rancher-exporter
 
+    ports:
+    - 9090:9090/tcp
+    command:
+    - -alertmanager.url=http://alertmanager:9093
+#    - -config.file=/root/prometheus.yml
+    -config.file=/etc/prometheus/prometheus.yml
+    - -storage.local.path=/prometheus
+    - -web.console.libraries=/etc/prometheus/console_libraries
+    - -web.console.templates=/etc/prometheus/consoles
+    labels:
+      io.rancher.sidekicks: prom-conf
+  graf-db:
+    image: winhong/graf-db
+    network_mode: none
+    volumes:
+    - /var/lib/grafana/
+    tty: true
+    links:
+    - prometheus:prometheus
+    - prometheus-rancher-exporter:prometheus-rancher-exporter
+    command:
+    - cat

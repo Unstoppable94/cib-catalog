@@ -1,5 +1,5 @@
-name: elasticsearch 5.3.1
+name: Prometheus
 description: |
-  elasticsearch 5 with docker log and systemd log collect,kibana
-version: v5.3.1
-category: elasticsearch5
+  Prometheus and friends, auto-discovering monitoring solution for Rancher deployments.
+version: 3.0.0
+category: Monitoring
