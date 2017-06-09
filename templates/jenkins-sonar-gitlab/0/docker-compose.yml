@@ -12,6 +12,7 @@ services:
     - /root/.m2:/root/.m2
     labels: 
       io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: usage=app
     stdin_open: true
     tty: true
   sonar:
@@ -20,6 +21,7 @@ services:
     - "${SonarPort}:9000"
     labels: 
       io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: usage=app
     stdin_open: true
     tty: true
   gitlab: 
@@ -34,5 +36,6 @@ services:
     - ${volume_gitlab_data}:/var/opt/gitlab
     labels: 
       io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: usage=app
     stdin_open: true
     tty: true
