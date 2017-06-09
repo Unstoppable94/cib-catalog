@@ -8,6 +8,7 @@ services:
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.dns: 'true'
+      io.rancher.scheduler.affinity:host_label: usage=monitor
   grafana:
     image: winhong/grafana
     tty: true
@@ -20,8 +21,11 @@ services:
     - 3000:3000/tcp
     labels:
       io.rancher.sidekicks: graf-db
+      io.rancher.scheduler.affinity:host_label: usage=monitor
   rancher-server-ip:
     image: rancher/external-service
+    labels:
+      io.rancher.scheduler.affinity:host_label: usage=monitor
   cadvisor:
     image: winhong/cadvisor:latest
     stdin_open: true
@@ -35,12 +39,14 @@ services:
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.dns: 'true'
+      io.rancher.scheduler.affinity:host_label: usage=monitor
   prometheus-rancher-exporter:
     image: winhong/prometheus-rancher-exporter:v0.22.52
     tty: true
     labels:
       io.rancher.container.agent.role: environment
       io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.affinity:host_label: usage=monitor
   prometheus:
     image: winhong/prometheus
     volumes:
@@ -53,6 +59,8 @@ services:
     - node-exporter:node-exporter
     - cadvisor:cadvisor
     - prometheus-rancher-exporter:prometheus-rancher-exporter
+    labels:
+      io.rancher.scheduler.affinity:host_label: usage=monitor
     ports:
     - 9090:9090/tcp
     command:
@@ -66,6 +74,8 @@ services:
     network_mode: none
     volumes:
     - /var/lib/grafana/
+    labels:
+      io.rancher.scheduler.affinity:host_label: usage=monitor
     tty: true
     links:
     - prometheus:prometheus
