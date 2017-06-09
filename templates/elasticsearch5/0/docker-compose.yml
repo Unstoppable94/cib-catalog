@@ -13,6 +13,7 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.global: 'true'
+      io.rancher.scheduler.affinity:host_label: usage=log
   elasticsearch-clients:
     image: winhong/wh-elasticsearch
     environment:
@@ -28,6 +29,7 @@ services:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-clients
+      io.rancher.scheduler.affinity:host_label: usage=log
   systemd-fluentd:
     privileged: true
     image: winhong/systemd-fluentd
@@ -41,6 +43,7 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.global: 'true'
+      io.rancher.scheduler.affinity:host_label: usage=log
   kibana-5:
     image: winhong/wh-kibana
     environment:
@@ -51,6 +54,7 @@ services:
     - 5601:5601/tcp
     labels:
       io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: usage=log
   elasticsearch-masters:
     image: winhong/wh-elasticsearch
     stdin_open: true
@@ -61,4 +65,5 @@ services:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-masters
+      io.rancher.scheduler.affinity:host_label: usage=log
 
