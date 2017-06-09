@@ -1,7 +1,7 @@
 version: '2'
 services:
   node-exporter:
-    image: prom/node-exporter:latest
+    image: winhong/node-exporter:latest
     stdin_open: true
     network_mode: host
     tty: true
@@ -9,7 +9,7 @@ services:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.dns: 'true'
   grafana:
-    image: grafana/grafana
+    image: winhong/grafana
     tty: true
     links:
     - prometheus:prometheus
@@ -23,7 +23,7 @@ services:
   rancher-server-ip:
     image: rancher/external-service
   cadvisor:
-    image: google/cadvisor:latest
+    image: winhong/cadvisor:latest
     stdin_open: true
     network_mode: host
     volumes:
@@ -36,7 +36,7 @@ services:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.dns: 'true'
   prometheus-rancher-exporter:
-    image: infinityworks/prometheus-rancher-exporter:v0.22.52
+    image: winhong/prometheus-rancher-exporter:v0.22.52
     tty: true
     labels:
       io.rancher.container.agent.role: environment
