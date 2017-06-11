@@ -2,6 +2,7 @@
   name: "WinGrow cicd"
   version: "v0.1.1"
   description: "WinGrow system"
+services:
   WinGrow:
     scale: 1
     start_on_create: true
