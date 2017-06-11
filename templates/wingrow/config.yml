@@ -1,4 +1,4 @@
-name: Winhong CICD
+name: Winhong WinGrow CICD
 description: |
   WinGrow ,a cicd system.
   include gitlab,sonar and an example maven project
