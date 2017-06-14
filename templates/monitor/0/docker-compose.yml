@@ -8,7 +8,6 @@ services:
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.dns: 'true'
-      io.rancher.scheduler.affinity:host_label: usage=monitor
   grafana:
     image: winhong/grafana
     tty: true
@@ -39,7 +38,6 @@ services:
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.dns: 'true'
-      io.rancher.scheduler.affinity:host_label: usage=monitor
   prometheus-rancher-exporter:
     image: winhong/prometheus-rancher-exporter:v0.22.52
     tty: true
