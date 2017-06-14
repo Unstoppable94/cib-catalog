@@ -13,7 +13,6 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.global: 'true'
-      io.rancher.scheduler.affinity:host_label: usage=log
   elasticsearch-clients:
     image: winhong/wh-elasticsearch
     environment:
@@ -43,7 +42,6 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.global: 'true'
-      io.rancher.scheduler.affinity:host_label: usage=log
   kibana-5:
     image: winhong/wh-kibana
     environment:
