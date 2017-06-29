@@ -5,14 +5,14 @@ oracle:
     ORACLE_ALLOW_REMOTE: true
   restart: always
   tty: true
-  image: winhong/oracle-xe-11g:v3
+  image: winhong/btpserver-oracle-xe-11g:v1
   stdin_open: true
 btpserver:
   labels:
     io.rancher.scheduler.affinity:host_label: cloud=demo
   restart: always
   tty: true
-  image: winhong/btpserver:v1
+  image: winhong/btpserver:v3
   links:
    - 'oracle:oracle'
   stdin_open: true
