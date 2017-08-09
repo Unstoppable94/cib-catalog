@@ -14,7 +14,7 @@ services:
     scale: 1
     start_on_create: true
   dockerregistry:
-   external_ips:
+    external_ips:
     - ${Docker_registry_ip}
     start_on_create: true
   gitlab:
