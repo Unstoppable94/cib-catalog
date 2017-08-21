@@ -12,7 +12,7 @@
       label: "Url to Download War Package"
       type: "string"
       required: true
-      default: "http://192.168.200.1/download/tomcat/demo.war"
+      default: "http://192.168.101.70/download/demo.war"
 wlslb:
   scale: 1
   load_balancer_config:
