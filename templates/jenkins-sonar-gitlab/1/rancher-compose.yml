@@ -76,7 +76,7 @@ version: '2'
       scale: 1
       start_on_create: true
     jenkins-client:
-      scale: ${slave_number}
+      scale: 2
       retain_ip: true
       health_check:
         port: 2375
