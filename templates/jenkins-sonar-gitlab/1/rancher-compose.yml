@@ -53,7 +53,7 @@ version: '2'
       type: "int"
       required: true
       default: 8080
-    - variable: "clients"
+    - variable: "slave_number"
       description: "jenkins  slave instance number "
       label: "Jenkins Slave number"
       type: "int"
@@ -76,7 +76,10 @@ version: '2'
       scale: 1
       start_on_create: true
     jenkins-client:
-      scale: ${clients}
+      scale_policy:
+        increment: 1
+        max: ${slave_number}
+        min: 1
       start_on_create: true
     jenkins-master:
       scale: 1
