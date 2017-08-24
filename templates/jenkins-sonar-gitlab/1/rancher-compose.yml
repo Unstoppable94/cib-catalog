@@ -31,16 +31,22 @@ version: '2'
       label: "WinGarden Server Url"
       type: "string"
       required: true
-    - variable: "secretKey"
-      description: "WinGarden secretKey ,generated in menu: API ->Keys "
-      label: "WinGarden secretKey"
-      type: "string"
-      required: true
     - variable: "accessKey"
       description: "WinGarden accessKey ,generated in menu: API ->Keys "
       label: "WinGarden accessKey"
       type: "string"
       required: true
+    - variable: "secretKey"
+      description: "WinGarden secretKey ,generated in menu: API ->Keys "
+      label: "WinGarden secretKey"
+      type: "string"
+      required: true
+     - variable: "JenkinsPort"
+      description: "jenkins server port"
+      label: "Jenkins Server Port"
+      type: "int"
+      required: true
+      default: 8080
     - variable: "slave_executors"
       description: "jenkins  slave exector number "
       label: "Jenkins Slave Executors"

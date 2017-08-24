@@ -1,12 +1,10 @@
 version: '2'
 services:
   jenkins-master:
-    privileged: true
+    privileged: false
     image: wh-cicd/jenkis-master
     ports: 
-    - "${JenkinsPort}:8080"
-    links:
-    - sonar:SonarHost
+    - "${JenkinsPort}:8080"    
     volumes:
     - /var/jenkins_home
     labels: 
@@ -15,6 +13,9 @@ services:
     tty: true
   jenkins-client:
     privileged: true
+    links:
+    - jenkins-master:jenkins-master
+    - sonar:SonarHost
     image: wh-cicd/jenkis-slave
     environment:
       JENKINS_MASTER: http://jenkins-master:8080
