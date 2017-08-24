@@ -78,7 +78,13 @@ version: '2'
     jenkins-client:
       scale: ${slave_number}
       retain_ip: true
-      start_on_create: true
+      health_check:
+        port: 2375
+        interval: 5000
+        unhealthy_threshold: 3
+        request_line: ''
+        healthy_threshold: 2
+        response_timeout: 5000
     jenkins-master:
       scale: 1
       start_on_create: true    
