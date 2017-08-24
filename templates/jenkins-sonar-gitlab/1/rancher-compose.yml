@@ -42,27 +42,24 @@ version: '2'
       type: "string"
       required: true
       default: ""    
-
     - variable: "accessKey"
       description: "WinGarden accessKey ,generated in menu: API ->Keys "
       label: "WinGarden accessKey"
       type: "string"
       required: true
       default: ""  
-
     - variable: "environment"
       description: "default environment id of application deployment  "
       label: "Default environment"
       type: "string"
       required: false
       default: "1a5" 
-   - variable: "SLAVE_EXECUTORS"
+   - variable: "slave_executors"
       description: "jenkins  slave exector number "
       label: "Jenkins Slave Executors"
       type: "int"
       required: true
       default: 1
-
     - variable: "SonarPort"
       description: "Sonar run port in the host"
       label: "Sonar Port Number"
