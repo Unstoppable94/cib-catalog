@@ -28,14 +28,12 @@ version: '2'
       default: false
       required: true
       type: "boolean"
-
     - variable: "wingarden_server_url"
       description: "WinGarden Server Url "
       label: "WinGarden Server Url"
       type: "string"
       required: true
       default: ""
-
     - variable: "secretKey"
       description: "WinGarden secretKey ,generated in menu: API ->Keys "
       label: "WinGarden secretKey"
@@ -53,7 +51,7 @@ version: '2'
       label: "Default environment"
       type: "string"
       required: false
-      default: "1a5" 
+      default: "1a5"
    - variable: "slave_executors"
       description: "jenkins  slave exector number "
       label: "Jenkins Slave Executors"
