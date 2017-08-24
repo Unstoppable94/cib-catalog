@@ -17,13 +17,13 @@ version: '2'
       required: true
       default: ""  
     - variable: "registry_port"
-      description: "Jenkins run port in the host"
-      label: "Docker Registry IP"
+      description: "docker registry port"
+      label: "Docker Registry Port"
       type: "int"
       required: true
       default: 80
     - variable: "registry_inscure"
-      description: "Jenkins run port in the host"
+      description: "scure of docker registry"
       label: "Docker Registry Scure"
       default: false
       required: true
@@ -37,25 +37,25 @@ version: '2'
       default: ""
 
     - variable: "secretKey"
-      description: "WinGarden secretKey "
+      description: "WinGarden secretKey ,generated in menu: API ->Keys "
       label: "WinGarden secretKey"
       type: "string"
       required: true
       default: ""    
 
     - variable: "accessKey"
-      description: "WinGarden accessKey "
+      description: "WinGarden accessKey ,generated in menu: API ->Keys "
       label: "WinGarden accessKey"
       type: "string"
       required: true
       default: ""  
 
     - variable: "environment"
-      description: "default environment of application deployment "
+      description: "default environment id of application deployment  "
       label: "Default environment"
-      type: "environment"
-      required: true
-      default: "" 
+      type: "string"
+      required: false
+      default: "1a5" 
 
     - variable: "SonarPort"
       description: "Sonar run port in the host"
