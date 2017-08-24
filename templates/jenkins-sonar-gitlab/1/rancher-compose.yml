@@ -41,7 +41,7 @@ version: '2'
       label: "WinGarden accessKey"
       type: "string"
       required: true
-   - variable: "slave_executors"
+    - variable: "slave_executors"
       description: "jenkins  slave exector number "
       label: "Jenkins Slave Executors"
       type: "int"
