@@ -53,8 +53,8 @@ version: '2'
       type: "int"
       required: true
       default: 8080
-    - variable: "slave_number"
-      description: "jenkins  slave instance number "
+    - variable: "slave_numbers"
+      description: "number of jenkins  slave instance  "
       label: "Jenkins Slave number"
       type: "int"
       required: true
@@ -76,7 +76,7 @@ version: '2'
       scale: 1
       start_on_create: true
     jenkins-client:
-      scale: 2
+      scale: ${slave_numbers}
       retain_ip: true
       health_check:
         port: 2375
