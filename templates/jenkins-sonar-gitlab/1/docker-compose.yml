@@ -1,0 +1,42 @@
+version: '2'
+services:
+  jenkins-master:
+    privileged: true
+    image: wh-cicd/jenkis-master
+    ports: 
+    - "${JenkinsPort}:8080"
+    links:
+    - sonar:SonarHost
+    volumes:
+    - /var/jenkins_home
+    labels: 
+      io.rancher.container.pull_image: always
+    stdin_open: true
+    tty: true
+  jenkins-client:
+    privileged: true
+    image: wh-cicd/jenkis-slave
+    environment:
+      JENKINS_MASTER: http://jenkins-master:8080
+      REGISTRY_AUTH: ${registry_auth}
+      REGISTRY_IP: ${registry_ip}
+      REGISTRY_PORT: ${registry_port}
+      REGISTRY_INSCURE: ${registry_inscure}
+      WINGARDEN_URL: ${wingarden_server_url}
+      SECRETKEY: ${secretKey}
+      ACCESSKEY: ${accessKey}
+      ENVIRONMENT: ${environment} 
+    volumes:
+    - /var/jenkins_home
+    labels: 
+      io.rancher.container.pull_image: always
+    stdin_open: true
+    tty: true  
+  sonar:
+    image: winhong/sonarqube:5.5
+    ports: 
+    - "${SonarPort}:9000"
+    labels: 
+      io.rancher.container.pull_image: always
+    stdin_open: true
+    tty: true

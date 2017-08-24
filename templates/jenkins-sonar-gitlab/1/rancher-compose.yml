@@ -1,0 +1,65 @@
+version: '2'
+.catalog:
+  name: "winhong cicd "
+  version: "v0.1.0"
+  description: "Jenkins-sonar-gitlab cicd"
+  questions:
+    - variable: "registry_auth"
+      description: "docker registry auth , in file ~/.docker/config.json "
+      label: "Docker Registry Auth"
+      type: "string"
+      required: true
+      default: ""
+    - variable: "registry_ip"
+      description: "docker registry ip "
+      label: "Docker Registry IP"
+      type: "string"
+      required: true
+      default: ""  
+    - variable: "registry_port"
+      description: "Jenkins run port in the host"
+      label: "Docker Registry IP"
+      type: "int"
+      required: true
+      default: 80
+    - variable: "registry_inscure"
+      description: "Jenkins run port in the host"
+      label: "Docker Registry Scure"
+      default: false
+      required: true
+      type: "boolean"
+
+    - variable: "wingarden_server_url"
+      description: "WinGarden Server Url "
+      label: "WinGarden Server Url"
+      type: "string"
+      required: true
+      default: ""
+
+    - variable: "secretKey"
+      description: "WinGarden secretKey "
+      label: "WinGarden secretKey"
+      type: "string"
+      required: true
+      default: ""    
+
+    - variable: "accessKey"
+      description: "WinGarden accessKey "
+      label: "WinGarden accessKey"
+      type: "string"
+      required: true
+      default: ""  
+
+    - variable: "environment"
+      description: "default environment of application deployment "
+      label: "Default environment"
+      type: "environment"
+      required: true
+      default: "" 
+
+    - variable: "SonarPort"
+      description: "Sonar run port in the host"
+      label: "Sonar Port Number"
+      type: "int"
+      required: true
+      default: 9000
