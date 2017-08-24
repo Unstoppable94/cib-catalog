@@ -56,6 +56,12 @@ version: '2'
       type: "string"
       required: false
       default: "1a5" 
+   - variable: "SLAVE_EXECUTORS"
+      description: "jenkins  slave exector number "
+      label: "Jenkins Slave Executors"
+      type: "int"
+      required: true
+      default: 1
 
     - variable: "SonarPort"
       description: "Sonar run port in the host"
