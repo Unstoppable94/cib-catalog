@@ -25,7 +25,7 @@ services:
       WINGARDEN_URL: ${wingarden_server_url}
       SECRETKEY: ${secretKey}
       ACCESSKEY: ${accessKey}
-      ENVIRONMENT: ${environment} 
+      ENVIRONMENT: ${env_id} 
       SLAVE_EXECUTORS: ${slave_executors}
     volumes:
     - /var/jenkins_home
