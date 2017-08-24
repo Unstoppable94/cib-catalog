@@ -76,10 +76,8 @@ version: '2'
       scale: 1
       start_on_create: true
     jenkins-client:
-      scale_policy:
-        increment: 1
-        max: ${slave_number}
-        min: 1
+      scale: ${slave_number}
+      retain_ip: true
       start_on_create: true
     jenkins-master:
       scale: 1
