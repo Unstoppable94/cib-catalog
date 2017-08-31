@@ -22,7 +22,7 @@ services:
     - /var/lib/winhong/elasticsearch/client-data:/usr/share/elasticsearch/data:z
     tty: true
     ports:
-    - 9200:9200/tcp
+    - 9200:9200
     user: root
     labels:
       io.rancher.container.hostname_override: container_name
@@ -49,7 +49,7 @@ services:
     stdin_open: true
     tty: true
     ports:
-    - 5601:5601/tcp
+    - 5601:5601
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: usage=log
