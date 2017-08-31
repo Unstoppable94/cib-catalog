@@ -1,6 +1,6 @@
 .catalog:
   name: "winhong cicd"
-  version: "v0.1.0"
+  version: v0.1.0
   description: "Jenkins-sonar-gitlab cicd"
   questions:
     - variable: "JenkinsPort"
