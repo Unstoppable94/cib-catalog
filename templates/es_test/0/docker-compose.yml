@@ -42,7 +42,7 @@ services:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-clients
-      io.rancher.scheduler.affinity:host_label: usage=app
+      io.rancher.scheduler.affinity:host_label: usage=log
   systemd-fluentd:
     privileged: true
     image: winhong/systemd-fluentd
