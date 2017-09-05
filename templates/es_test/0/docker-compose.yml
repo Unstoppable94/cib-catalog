@@ -25,6 +25,7 @@ services:
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-masters
       io.rancher.scheduler.affinity:host_label: usage=log
   elasticsearch-clients:
+    privileged: true
     image: elasticsearch/elasticsearch:sq-test1
     environment:
       XPACK_SECURITY_ENABLED: 'true'
@@ -41,7 +42,7 @@ services:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-clients
-      io.rancher.scheduler.affinity:host_label: usage=log
+      io.rancher.scheduler.affinity:host_label: usage=app
   systemd-fluentd:
     privileged: true
     image: winhong/systemd-fluentd
@@ -65,5 +66,21 @@ services:
     - 5601:5601/tcp
     labels:
       io.rancher.container.pull_image: always
+<<<<<<< HEAD
       io.rancher.scheduler.affinity:host_label: usage=log
+=======
+      io.rancher.scheduler.affinity:host_label: usage=app
+  elasticsearch-masters:
+    privileged: true
+    image: elasticsearch/elasticsearch:sq-test1
+    stdin_open: true
+    volumes:
+    - /var/lib/winhong/elasticsearch/master-data:/usr/share/elasticsearch/data:z
+    tty: true
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-masters
+      io.rancher.scheduler.affinity:host_label: usage=app
+>>>>>>> 6444a784bf7f6090f84f022cbfa3aab4fb607152
 
