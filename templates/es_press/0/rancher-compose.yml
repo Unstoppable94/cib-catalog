@@ -13,20 +13,5 @@
   press-container:
     scale: 1
     health_check:
-      # Which port to perform the check against
-      port: 80
-      # For TCP, request_line needs to be '' or not shown
-      # TCP Example:
-      # request_line: ''
-      request_line: GET /healthcheck HTTP/1.0
-      # Interval is measured in milliseconds
-      interval: 2000
-      initializing_timeout: 60000
-      reinitializing_timeout: 60000
-      unhealthy_threshold: 3
-      # Strategy for what to do when unhealthy
-      # In this service, no action will occur when a container is found unhealthy
       strategy: none
-      healthy_threshold: 2
-      # Response timeout is measured in milliseconds
-      response_timeout: 2000
+
