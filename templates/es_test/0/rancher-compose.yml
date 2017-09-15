@@ -3,6 +3,13 @@
   version: v5.3.1
   description: "云宏定制版本，采集docker log 及systemd log，要求docker 日志采用json-file 模式"
   services:
+  questions:
+    - variable: "kopf_port"
+      label: "Public Port"
+      description: "Unique public port for kopf"
+      type: "int"
+      default: 8082
+      required: true
   dockerlog-fluentd:
     start_on_create: true
     health_check:
