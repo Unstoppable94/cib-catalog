@@ -2,7 +2,6 @@
   name: "es-press"
   version: v5.3.1
   description: "test es"
-  services:
   questions:
     - variable: "lognum"
       label: "out put nums"
@@ -10,7 +9,15 @@
       type: "int"
       default: 10000
       required: true
+  services:
   press-container:
     scale: 1
     health_check:
+      port: 80
+      # Interval is measured in milliseconds
+      interval: 2000
+      initializing_timeout: 60000
+      unhealthy_threshold: 3
+      healthy_threshold: 2
+      response_timeout: 2000
       strategy: none
