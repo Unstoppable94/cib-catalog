@@ -14,16 +14,11 @@
     scale: 1
     start_on_create: true
     health_check:
-      # Which port to perform the check against
       port: 80
-      # Interval is measured in milliseconds
       interval: 2000
       initializing_timeout: 60000
       unhealthy_threshold: 3
-      # Strategy for what to do when unhealthy
-      # In this service, no action will occur when a container is found unhealthy
       strategy: none
-      healthy_threshold: 2
-      # Response timeout is measured in milliseconds
       response_timeout: 2000
+      healthy_threshold: 2
 
