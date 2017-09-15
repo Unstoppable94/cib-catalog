@@ -12,6 +12,5 @@
 services: 
   press-container:
     scale: 1
-    health_check:
-      strategy: none
+
 
