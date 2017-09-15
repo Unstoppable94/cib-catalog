@@ -1,7 +1,7 @@
 version: '2'
 services:
   test-container:
-    image: elasticsearch/es-press:1
+    image: elasticsearch/es-press:latest
     stdin_open: true
     environment:
       RUN_NUM: $lognum
