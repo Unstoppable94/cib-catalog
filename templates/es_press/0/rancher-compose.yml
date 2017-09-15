@@ -9,9 +9,8 @@
       type: "int"
       default: 10000
       required: true
-  services:
+  services: 
     press-container:
-      scale: 1
       health_check: 
         port: 80
         interval: 2000
