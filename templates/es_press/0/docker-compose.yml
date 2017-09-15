@@ -1,11 +1,10 @@
-version: '2'
-services:
-  press-container:
-    image: elasticsearch/es-press:latest
-    stdin_open: true
-    environment:
-      RUN_NUM: $lognum
-    ports:
-    - "80"
-    labels:
-      io.rancher.container.pull_image: always
+
+press-container:
+  image: elasticsearch/es-press:latest
+  stdin_open: true
+  environment:
+    RUN_NUM: $lognum
+  ports:
+  - "80"
+  labels:
+    io.rancher.container.pull_image: always
