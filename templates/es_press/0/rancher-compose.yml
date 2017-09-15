@@ -1,0 +1,14 @@
+.catalog:
+  name: "es-press"
+  version: v5.3.1
+  description: "test es"
+  services:
+  questions:
+    - variable: "lognum"
+      label: "out put nums"
+      description: "how many log to write"
+      type: "int"
+      default: 10000
+      required: true
+  press-container:
+    scale: 1
