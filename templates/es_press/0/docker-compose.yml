@@ -5,5 +5,7 @@ services:
     stdin_open: true
     environment:
       RUN_NUM: $lognum
+    ports:
+    - "80"
     labels:
       io.rancher.container.pull_image: always
