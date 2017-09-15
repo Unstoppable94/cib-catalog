@@ -1,0 +1,15 @@
+host_label=traefik_lb\=true
+http_port=8080
+https_port=8443
+admin_port=8000
+https_enable=false
+acme_enable=false
+acme_email=test\@traefik.io
+acme_ondemand=true
+acme_onhostrule=true
+ssl_key=
+ssl_crt=
+insecure_skip=false
+refresh_interval=10
+VOLUME_NAME=TRAEFIK
+VOLUME_DRIVER=rancher-nfs
