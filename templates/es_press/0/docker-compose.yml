@@ -3,6 +3,7 @@ version: '1'
     press-container:
       image: elasticsearch/es-press:latest
       stdin_open: true
+      tty: true
       environment:
         RUN_NUM: $lognum
       labels:
