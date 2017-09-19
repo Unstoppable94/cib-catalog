@@ -9,7 +9,7 @@
       type: "int"
       default: 10000
       required: true
-press-container:
-  scale: 1
+  press-container:
+    scale: 1
 
 
