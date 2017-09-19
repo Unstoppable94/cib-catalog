@@ -12,6 +12,7 @@
 press-container:
   scale: 1
   health_check:
+    port: 80
     interval: 3000
     unhealthy_threshold: 9
     strategy: none
