@@ -1,5 +1,5 @@
 version: '1'
-  services:
+services:
     press-container:
       image: elasticsearch/es-press:latest
       stdin_open: true
