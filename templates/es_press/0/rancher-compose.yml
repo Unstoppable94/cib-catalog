@@ -11,5 +11,13 @@
       required: true
   press-container:
     scale: 1
+    health_check:
+      port: 80
+      interval: 2000
+      initializing_timeout: 6000
+      unhealthy_threshold: 3
+      strategy: none
+      response_timeout: 2000
+      healthy_threshold: 2
 
 
