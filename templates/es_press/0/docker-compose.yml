@@ -8,4 +8,4 @@ services:
         RUN_NUM: $lognum
       labels:
         io.rancher.container.pull_image: always
-        app.log: es-press
+        app: es-press
