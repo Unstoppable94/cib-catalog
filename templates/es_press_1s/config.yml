@@ -1,5 +1,5 @@
-name: es-press
+name: es-press-1s
 description: |
   press test for es 5.3
 version: v5.3.1
-category: elasticsearch-press-test
+category: elasticsearch-press-test-1s
