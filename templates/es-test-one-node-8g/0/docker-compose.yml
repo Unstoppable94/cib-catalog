@@ -1,19 +1,5 @@
 version: '2'
 services:
-  dockerlog-fluentd:
-    privileged: true
-    image: winhong/dockerlog-fluentd
-    stdin_open: true
-    volumes:
-    - /var/lib/docker:/var/lib/docker:ro
-    - /var/log/fluentd
-    - /root/es-test/fluent.conf:/fluentd/etc/fluent.conf
-    tty: true
-    pid: host
-    user: root
-    labels:
-      io.rancher.container.pull_image: always
-      io.rancher.scheduler.global: 'true'
   elasticsearch-clients:
     privileged: true
     image: elasticsearch/elasticsearch:sq-test1
@@ -32,19 +18,6 @@ services:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-clients
       io.rancher.scheduler.affinity:host_label: usage=log
-  systemd-fluentd:
-    privileged: true
-    image: winhong/systemd-fluentd
-    stdin_open: true
-    volumes:
-    - /var/log/fluentd:/var/log/fluentd:rw
-    - /run/log/journal:/run/log/journal
-    tty: true
-    pid: host
-    user: root
-    labels:
-      io.rancher.container.pull_image: always
-      io.rancher.scheduler.global: 'true'
   kibana-5:
     image: winhong/wh-kibana
     environment:
@@ -56,4 +29,18 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: usage=log
+  dockerlog-fluentd:
+    privileged: true
+    image: winhong/dockerlog-fluentd
+    stdin_open: true
+    volumes:
+    - /var/lib/docker:/var/lib/docker:ro
+    - /var/log/fluentd
+    - /root/es-test/fluent.conf:/fluentd/etc/fluent.conf
+    tty: true
+    pid: host
+    user: root
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'
 
