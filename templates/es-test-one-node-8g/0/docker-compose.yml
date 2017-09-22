@@ -22,7 +22,7 @@ services:
     stdin_open: true
     volumes:
     - /root/es-test/elasticsearch-one-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
-    - /var/lib/winhong/elasticsearch/client-data:/usr/share/elasticsearch/data:z
+    - /usr/share/elasticsearch/data
     tty: true
     ports: 
     - 9200:9200/tcp
