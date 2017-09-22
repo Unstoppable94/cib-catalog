@@ -1,9 +1,11 @@
-version: '1'
-  services:
+version: '2'
+services:
     press-container:
       image: elasticsearch/es-press:latest
       stdin_open: true
+      tty: true
       environment:
         RUN_NUM: $lognum
       labels:
         io.rancher.container.pull_image: always
+        app: es-press
