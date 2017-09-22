@@ -13,25 +13,12 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.global: 'true'
-  elasticsearch-masters:
-    image: elasticsearch/elasticsearch:sq-test1
-    stdin_open: true
-    volumes:
-    - /var/lib/winhong/elasticsearch/master-data:/usr/share/elasticsearch/data:z
-    tty: true
-    labels:
-      io.rancher.container.hostname_override: container_name
-      io.rancher.container.pull_image: always
-      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-masters
-      io.rancher.scheduler.affinity:host_label: usage=log
   elasticsearch-clients:
     privileged: true
     image: elasticsearch/elasticsearch:sq-test1
     environment:
       XPACK_SECURITY_ENABLED: 'true'
     stdin_open: true
-    links: 
-    - "elasticsearch-masters:es-masters"
     volumes:
     - /var/lib/winhong/elasticsearch/client-data:/usr/share/elasticsearch/data:z
     tty: true
@@ -56,17 +43,6 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.global: 'true'
-  kopf:
-    image: rancher/kopf:v0.4.0
-    ports:
-    - "${kopf_port}:80"
-    environment:
-      KOPF_SERVER_NAME: 'es.dev'
-      KOPF_ES_SERVERS: 'es-clients:9200'
-    labels:
-      io.rancher.container.hostname_override: container_name
-    links:
-    - elasticsearch-clients:es-clients
   kibana-5:
     image: winhong/wh-kibana
     environment:
