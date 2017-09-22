@@ -20,7 +20,7 @@ services:
       XPACK_SECURITY_ENABLED: 'true'
     stdin_open: true
     volumes:
-    - /root/es-test/elasticsearch-one.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    - /root/es-test/elasticsearch-one-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
     - /var/lib/winhong/elasticsearch/client-data:/usr/share/elasticsearch/data:z
     tty: true
     ports: 
