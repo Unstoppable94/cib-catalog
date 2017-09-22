@@ -6,7 +6,7 @@ services:
     stdin_open: true
     volumes:
     - /var/lib/docker:/var/lib/docker:ro
-    - /var/log/fluentd:/var/log/fluentd
+    - /var/log/fluentd
     - /root/es-test/fluent.conf:/fluentd/etc/fluent.conf
     tty: true
     pid: host
