@@ -8,4 +8,5 @@ services:
         RUN_NUM: $lognum
       labels:
         io.rancher.container.pull_image: always
+        io.rancher.scheduler.affinity:host_label: usage=test
         app: es-press
