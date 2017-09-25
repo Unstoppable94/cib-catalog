@@ -1,0 +1,94 @@
+version: '2'
+services:
+  sonar:
+    image: wh-cicd/sonar:5.6.6-mariadb
+    environment:
+      SONARQUBE_JDBC_USERNAME: sonar
+      SONARQUBE_JDBC_PASSWORD: password
+      SONARQUBE_JDBC_URL: jdbc:mysql://mariadb:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
+    stdin_open: true
+    tty: true
+    links:
+    - mariadb:mariadb
+    ports:
+    - 9000:9000/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  mariadb:
+    image: wh-cicd/mariadb:10.3.1-sonar
+    stdin_open: true
+    tty: true
+    ports:
+    - 3306:3306/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  jenkins-client:
+    privileged: true
+    image: wh-cicd/jenkis-slave:20170921
+    environment:
+      ACCESSKEY: 47551EC490F934813DE0
+      ENVIRONMENT: 1a5
+      JENKINS_MASTER: http://jenkins-master:8080
+      REGISTRY_AUTH: eGllaHE6QWNkMTIzNDU=
+      REGISTRY_INSCURE: 'false'
+      REGISTRY_IP: 10.0.2.50
+      REGISTRY_PORT: '80'
+      SECRETKEY: i21bRJAQE4PcAUFzHnQGHxHncbvL5TuzaU35UiGZ
+      SLAVE_EXECUTORS: '1'
+      WINGARDEN_URL: http://192.168.101.2:8080
+    stdin_open: true
+    volumes:
+    - /root/jenkins-groovy:/jenkins-groovy
+    tty: true
+    links:
+    - jenkins-master:jenkins-master
+    labels:
+      io.rancher.container.pull_image: always
+  wingrow:
+    image: wingrow/wingrow:20170922
+    environment:
+      JENKINS_MASTER: http://jenkins-master:8080
+      SECRETKEY: i21bRJAQE4PcAUFzHnQGHxHncbvL5TuzaU35UiGZ
+      WINGARDEN_URL: http://192.168.101.2:8080/
+      ACCESSKEY: 47551EC490F934813DE0
+      ENVIRONMENT: 1a5
+      JENKINS_USERNAME: jenkins
+      JENKINS_PASSWORD: w12sedwiokd
+      TOKEN_EXPIRY: '1440'
+      REGISTRY_AUTH: eGllaHE6QWNkMTIzNDU=
+      REGISTRY_IP: 10.0.2.50
+      REGISTRY_PORT: '80'
+      REGISTRY_INSCURE: 'TRUE'
+      SMTP_SSL: 'FALSE'
+      SMTP_PORT: '365'
+      SMTP_HOST: MAIL.QQ.COM
+      SMTP_USER: XIEHQ
+      SMTP_PASSWORD: PASSWORD
+      SONAR_URL: HTTP://sonar:8080
+      SONAR_USER: wingrow
+      SONAR_PASSWORD: wer123231sd
+      LDAP_URL: ldap://192.168.101.114:389
+      LDAP_SEARACHBASE: ou=winhong,DC=wingarden,DC=com
+      LDAP_USER: cn=administrator,cn=users,dc=wingarden,dc=com
+      LDAP_PASSWORD: P@ssw0rd
+      LDAP_TIMEOUT: '200'
+      FORCE_INIT: 'TRUE'
+    stdin_open: true
+    tty: true
+    links:
+    - jenkins-master:jenkins-master
+    - jenkins-master:jenkins-master
+    ports:
+    - 8100:8100/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  jenkins-master:
+    image: wh-cicd/jenkis-master:20170915
+    stdin_open: true
+    volumes:
+    - /var/jenkins_home
+    tty: true
+    ports:
+    - 8080:8080/tcp
+    labels:
+      io.rancher.container.pull_image: always
