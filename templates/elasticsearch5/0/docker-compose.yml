@@ -1,18 +1,16 @@
 version: '2'
 services:
-  dockerlog-fluentd:
-    privileged: true
-    image: winhong/dockerlog-fluentd
+  elasticsearch-masters:
+    image: winhong/wh-elasticsearch
     stdin_open: true
     volumes:
-    - /var/lib/docker:/var/lib/docker:ro
-    - /var/log/fluentd:/var/log/fluentd
+    - /var/lib/winhong/elasticsearch/master-data:/usr/share/elasticsearch/data:z
     tty: true
-    pid: host
-    user: root
     labels:
+      io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
-      io.rancher.scheduler.global: 'true'
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-masters
+      io.rancher.scheduler.affinity:host_label: usage=log
   elasticsearch-clients:
     image: winhong/wh-elasticsearch
     environment:
@@ -29,6 +27,19 @@ services:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-clients
       io.rancher.scheduler.affinity:host_label: usage=log
+  dockerlog-fluentd:
+    privileged: true
+    image: winhong/dockerlog-fluentd
+    stdin_open: true
+    volumes:
+    - /var/lib/docker:/var/lib/docker:ro
+    - /var/log/fluentd:/var/log/fluentd
+    tty: true
+    pid: host
+    user: root
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'
   systemd-fluentd:
     privileged: true
     image: winhong/systemd-fluentd
@@ -53,15 +64,5 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: usage=log
-  elasticsearch-masters:
-    image: winhong/wh-elasticsearch
-    stdin_open: true
-    volumes:
-    - /var/lib/winhong/elasticsearch/master-data:/usr/share/elasticsearch/data:z
-    tty: true
-    labels:
-      io.rancher.container.hostname_override: container_name
-      io.rancher.container.pull_image: always
-      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-masters
-      io.rancher.scheduler.affinity:host_label: usage=log
+  
 
