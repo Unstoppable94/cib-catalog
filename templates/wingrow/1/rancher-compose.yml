@@ -1,0 +1,17 @@
+version: '2'
+services:
+  sonarqube-56:
+    scale: 1
+    start_on_create: true
+  sonar-mariadb2:
+    scale: 1
+    start_on_create: true
+  jenkins-client:
+    scale: 1
+    start_on_create: true
+  wingrow:
+    scale: 1
+    start_on_create: true
+  jenkins-master:
+    scale: 1
+    start_on_create: true
