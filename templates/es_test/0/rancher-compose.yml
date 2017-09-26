@@ -61,7 +61,7 @@
       interval: 2000
       strategy: recreate
       reinitializing_timeout: 60000
-  elasticsearch-data:
+  elasticsearch-datas:
     scale: 1
     start_on_create: true
     health_check:
