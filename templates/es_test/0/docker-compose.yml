@@ -4,7 +4,7 @@ services:
     image: winhong/wh-elasticsearch
     stdin_open: true
     volumes:
-    - /var/lib/winhong/elasticsearch/master-data:/usr/share/elasticsearch/data:z
+    - /usr/share/elasticsearch/data
     - /root/es-test/elasticsearch-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
     tty: true
     labels:
@@ -34,7 +34,7 @@ services:
     image: winhong/wh-elasticsearch
     stdin_open: true
     volumes:
-    - /var/lib/winhong/elasticsearch/data:/usr/share/elasticsearch/data:z
+    - /usr/share/elasticsearch/data:z
     - /root/es-test/elasticsearch-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
     tty: true
     labels:
