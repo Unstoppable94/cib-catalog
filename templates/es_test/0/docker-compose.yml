@@ -5,6 +5,7 @@ services:
     stdin_open: true
     volumes:
     - /var/lib/winhong/elasticsearch/master-data:/usr/share/elasticsearch/data:z
+    - /root/es-press/elasticsearch-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
     tty: true
     labels:
       io.rancher.container.hostname_override: container_name
@@ -17,9 +18,9 @@ services:
     environment:
       XPACK_SECURITY_ENABLED: 'true'
     stdin_open: true
-    volumes:
-    - /var/lib/winhong/elasticsearch/client-data:/usr/share/elasticsearch/data:z
     tty: true
+    volumes:
+    - /root/es-press/elasticsearch-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
     ports: 
     - 9200:9200/tcp
     user: root
@@ -27,6 +28,21 @@ services:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-clients
+      io.rancher.scheduler.affinity:host_label: usage=log
+  elasticsearch-data:
+    privileged: true
+    image: elasticsearch/elasticsearch:sq-test1
+    environment:
+      XPACK_SECURITY_ENABLED: 'true'
+    stdin_open: true
+    volumes:
+    - /var/lib/winhong/elasticsearch/data:/usr/share/elasticsearch/data:z
+    - /root/es-press/elasticsearch-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
+    tty: true
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-data
       io.rancher.scheduler.affinity:host_label: usage=log
   dockerlog-fluentd:
     privileged: true
