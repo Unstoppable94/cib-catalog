@@ -5,7 +5,7 @@ services:
     stdin_open: true
     volumes:
     - /var/lib/winhong/elasticsearch/master-data:/usr/share/elasticsearch/data:z
-    - /root/es-press/elasticsearch-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
+    - /root/es-test/elasticsearch-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
     tty: true
     labels:
       io.rancher.container.hostname_override: container_name
@@ -20,7 +20,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-    - /root/es-press/elasticsearch-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
+    - /root/es-test/elasticsearch-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
     ports: 
     - 9200:9200/tcp
     user: root
@@ -37,7 +37,7 @@ services:
     stdin_open: true
     volumes:
     - /var/lib/winhong/elasticsearch/data:/usr/share/elasticsearch/data:z
-    - /root/es-press/elasticsearch-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
+    - /root/es-test/elasticsearch-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
     tty: true
     labels:
       io.rancher.container.hostname_override: container_name
@@ -51,7 +51,6 @@ services:
     volumes:
     - /var/lib/docker:/var/lib/docker:ro
     - /var/log/fluentd:/var/log/fluentd
-    - /root/es-test/fluent.conf:/fluentd/etc/fluent.conf
     tty: true
     pid: host
     user: root
