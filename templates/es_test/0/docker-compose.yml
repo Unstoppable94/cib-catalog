@@ -1,7 +1,7 @@
 version: '2'
 services:
   elasticsearch-masters:
-    image: elasticsearch/elasticsearch:sq-test1
+    image: winhong/wh-elasticsearch
     stdin_open: true
     volumes:
     - /var/lib/winhong/elasticsearch/master-data:/usr/share/elasticsearch/data:z
@@ -14,7 +14,7 @@ services:
       io.rancher.scheduler.affinity:host_label: usage=log
   elasticsearch-clients:
     privileged: true
-    image: elasticsearch/elasticsearch:sq-test1
+    image: winhong/wh-elasticsearch
     environment:
       XPACK_SECURITY_ENABLED: 'true'
     stdin_open: true
@@ -31,7 +31,7 @@ services:
       io.rancher.scheduler.affinity:host_label: usage=log
   elasticsearch-datas:
     privileged: true
-    image: elasticsearch/elasticsearch:sq-test1
+    image: winhong/wh-elasticsearch
     stdin_open: true
     volumes:
     - /var/lib/winhong/elasticsearch/data:/usr/share/elasticsearch/data:z
