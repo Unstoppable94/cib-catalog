@@ -1,4 +1,4 @@
-name: Winhong CICD
+name: jenkins-sonar-gitlab
 description: |
   jenkins-sonar-gitlab cicd
 version: v1.0.0
