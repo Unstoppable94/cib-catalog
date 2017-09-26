@@ -34,7 +34,7 @@ services:
     image: winhong/wh-elasticsearch
     stdin_open: true
     volumes:
-    - /usr/share/elasticsearch/data:z
+    - /usr/share/elasticsearch/data
     - /root/es-test/elasticsearch-node.tmpl:/etc/confd/templates/elasticsearch.tmpl
     tty: true
     labels:
