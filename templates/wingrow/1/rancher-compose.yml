@@ -5,21 +5,66 @@ catalog:
   description: |
     WinHong's cicd system ,part of WinGarden suite.
   services:
-    sonarqube-56:
-      scale: 1
-      start_on_create: true
-    sonar-mariadb2:
-      scale: 1
-      start_on_create: true
-    jenkins-client:
-      scale: 1
-      start_on_create: true
-    wingrow:
-      scale: 1
-      start_on_create: true
-    jenkins-master:
-      scale: 1
-      start_on_create: true
+  mariadb:
+    scale: 1
+    start_on_create: true
+    health_check:
+      response_timeout: 5000
+      healthy_threshold: 2
+      port: 3306
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 5000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  sonar:
+    scale: 1
+    start_on_create: true
+    health_check:
+      response_timeout: 5000
+      healthy_threshold: 2
+      port: 9000
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 5000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  wingrow:
+    scale: 1
+    start_on_create: true
+    health_check:
+      response_timeout: 5000
+      healthy_threshold: 2
+      port: 8100
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 5000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  jenkins-client:
+    scale: 1
+    start_on_create: true
+    health_check:
+      response_timeout: 5000
+      healthy_threshold: 2
+      port: 2375
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 5000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  jenkins-master:
+    scale: 1
+    start_on_create: true
+    health_check:
+      response_timeout: 5000
+      healthy_threshold: 2
+      port: 8080
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 5000
+      strategy: recreate
+      reinitializing_timeout: 60000
   questions:
     - variable: "WINGARDEN_URL"
       type: string
@@ -55,24 +100,19 @@ catalog:
       required: true
       label: "Registry Auth"
       description: "Docker Registry Auth ,you can find auth in ~/.docker/config.json"
-      default: "80" 
+      default: "" 
       required: true
     - variable: "REGISTRY_INSCURE"
       type: boolean
       required: true
-      label: "Registry scured "
-      description: "Docker Registry scured ,if access by https ,the value is false"
-      default: "false" 
+      label: "Registry inscure "
+      description: "Docker Registry scured ,if access by http ,the value is true"
+      default: "true" 
     - variable: "LDAP_URL"
       type: string
       label: "LDAP URL "
       description: "LDAP server address,used when use openldap/AD to do user authentication "
       default: "ldap://X.X.X.X:389"      
-    - variable: "LDAP_SEARACHBASE"
-      type: string
-      label: "LDAP Search Base  "
-      description: "LDAP search base  "
-      default: ""    
     - variable: "LDAP_SEARACHBASE"
       type: string
       label: "LDAP Search Base  "
@@ -130,3 +170,9 @@ catalog:
       label: "Slave's executes   "
       description: "Excutes number of jenkins slave "
       default: 1 
+    - variable: "FORCE_INIT"
+      type: boolean
+      required: true
+      label: "Force Init "
+      description: "Reinit Wingrow by environment vars after restart "
+      default: false   
