@@ -15,3 +15,133 @@ services:
   jenkins-master:
     scale: 1
     start_on_create: true
+questions:
+    - variable: "WINGARDEN_URL"
+      type: string
+      required: true
+      label: "WinGarden server URL"
+      description: "WinGarden server URL"
+    - variable: "ACCESSKEY"
+      type: string
+      required: true
+      label: "ACCESSKEY"
+      description: "ACCESSKEY of WinGarden"
+      default: ""
+    - variable: "SECRETKEY"
+      type: string
+      required: true
+      label: "SECRETKEY"
+      description: "SECRETKEY of WinGarden"   
+      default: ""
+
+    - variable: "REGISTRY_IP"
+      type: string
+      required: true
+      label: "Registry IP"
+      description: "Docker Registry IP"
+      default: ""
+    - variable: "REGISTRY_PORT"
+      type: string
+      required: true
+      label: "Registry Port"
+      description: "Docker Registry Port"
+      default: "80"
+    - variable: "REGISTRY_AUTH"
+      type: string
+      required: true
+      label: "Registry Auth"
+      description: "Docker Registry Auth ,you can find auth in ~/.docker/config.json"
+      default: "80" 
+    - variable: "REGISTRY_INSCURE"
+      type: string
+      required: true
+      label: "Registry scured "
+      description: "Docker Registry scured ,if access by https ,the value is false"
+      default: "false" 
+
+     - variable: "LDAP_URL"
+      type: string
+      required: true
+      label: "LDAP URL "
+      description: "LDAP server address,used when use openldap/AD to do user authentication "
+      default: "ldap://X.X.X.X:389"      
+     - variable: "LDAP_SEARACHBASE"
+      type: string
+      required: true
+      label: "LDAP Search Base  "
+      description: "LDAP search base  "
+      default: ""    
+     - variable: "LDAP_SEARACHBASE"
+      type: string
+      required: true
+      label: "LDAP Search Base  "
+      description: "LDAP search base  "
+      default: ""    
+     - variable: "LDAP_USER"
+      type: string
+      required: true
+      label: "LDAP user "
+      description: "LDAP search base  "
+      default: ""   
+          
+     - variable: "LDAP_PASSWORD"
+      type: string
+      required: true
+      label: "LDAP User's password "
+      description: "LDAP search base  "
+      default: ""   
+     - variable: "LDAP_TIMEOUT"
+      type: string
+      required: true
+      label: "LDAP TIMEOUT "
+      description: "LDAP connetction timeout   "
+      default: "200"    
+
+     - variable: "SMTP_HOST"
+      type: string
+      required: true
+      label: "SMTP Server"
+      description: "Reuqired by notify feature,ip or domain name  "
+      default: "200"    
+
+    - variable: "SMTP_PORT"
+      type: string
+      required: true
+      label: "SMTP Port "
+      description: "Reuqired by notify feature "
+      default: "365"  
+
+    - variable: "SMTP_USER"
+      type: string
+      required: true
+      label: "SMTP User "
+      description: "Reuqired by notify feature "
+      default: "200"    
+    
+    - variable: "SMTP_PASSWORD"
+      type: string
+      required: true
+      label: "SMTP Password "
+      description: "Reuqired by notify feature "
+      default: "200"   
+  
+    - variable: "SMTP_SSL"
+      type: string
+      required: true
+      label: "SMTP SSL "
+      description: "TURE for use  SSL"
+      default: "FALSE"  
+ - variable: "TOKEN_EXPIRY"
+      type: string
+      required: true
+      label: "Token Expiry(Minutes)"
+      description: "Token expiry time, default is half hour "
+      default: "30"  
+ - variable: "SLAVE_EXECUTORS"
+      type: string
+      required: true
+      label: "Slave's executes   "
+      description: "Excutes number of jenkins slave "
+      default: "1"   
+ 
+

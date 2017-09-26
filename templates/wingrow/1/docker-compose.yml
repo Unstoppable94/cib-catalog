@@ -26,19 +26,16 @@ services:
     privileged: true
     image: wh-cicd/jenkis-slave:20170921
     environment:
-      ACCESSKEY: 47551EC490F934813DE0
-      ENVIRONMENT: 1a5
       JENKINS_MASTER: http://jenkins-master:8080
-      REGISTRY_AUTH: eGllaHE6QWNkMTIzNDU=
-      REGISTRY_INSCURE: 'false'
-      REGISTRY_IP: 10.0.2.50
-      REGISTRY_PORT: '80'
-      SECRETKEY: i21bRJAQE4PcAUFzHnQGHxHncbvL5TuzaU35UiGZ
-      SLAVE_EXECUTORS: '1'
-      WINGARDEN_URL: http://192.168.101.2:8080
+      REGISTRY_AUTH: ${REGISTRY_AUTH}
+      REGISTRY_INSCURE: '${REGISTRY_INSCURE}'
+      REGISTRY_IP: ${REGISTRY_IP}
+      REGISTRY_PORT: '${REGISTRY_PORT}'
+      SLAVE_EXECUTORS: '${SLAVE_EXECUTORS}'
+      WINGARDEN_URL: ${WINGARDEN_URL}
+      SECRETKEY: ${SECRETKEY}
+      ACCESSKEY: ${ACCESSKEY}
     stdin_open: true
-    volumes:
-    - /root/jenkins-groovy:/jenkins-groovy
     tty: true
     links:
     - jenkins-master:jenkins-master
@@ -47,43 +44,41 @@ services:
   wingrow:
     image: wingrow/wingrow:20170922
     environment:
-      JENKINS_MASTER: http://jenkins-master:8080
-      SECRETKEY: i21bRJAQE4PcAUFzHnQGHxHncbvL5TuzaU35UiGZ
-      WINGARDEN_URL: http://192.168.101.2:8080/
-      ACCESSKEY: 47551EC490F934813DE0
-      ENVIRONMENT: 1a5
-      JENKINS_USERNAME: jenkins
-      JENKINS_PASSWORD: w12sedwiokd
-      TOKEN_EXPIRY: '1440'
-      REGISTRY_AUTH: eGllaHE6QWNkMTIzNDU=
-      REGISTRY_IP: 10.0.2.50
-      REGISTRY_PORT: '80'
-      REGISTRY_INSCURE: 'TRUE'
-      SMTP_SSL: 'FALSE'
-      SMTP_PORT: '365'
-      SMTP_HOST: MAIL.QQ.COM
-      SMTP_USER: XIEHQ
-      SMTP_PASSWORD: PASSWORD
       SONAR_URL: HTTP://sonar:8080
       SONAR_USER: wingrow
       SONAR_PASSWORD: wer123231sd
-      LDAP_URL: ldap://192.168.101.114:389
-      LDAP_SEARACHBASE: ou=winhong,DC=wingarden,DC=com
-      LDAP_USER: cn=administrator,cn=users,dc=wingarden,dc=com
-      LDAP_PASSWORD: P@ssw0rd
-      LDAP_TIMEOUT: '200'
-      FORCE_INIT: 'TRUE'
+      JENKINS_MASTER: http://jenkins-master:8080
+      JENKINS_USERNAME: jenkins
+      JENKINS_PASSWORD: w12sedwiokd
+      WINGARDEN_URL: ${WINGARDEN_URL}
+      ACCESSKEY: ${ACCESSKEY}
+      SECRETKEY: ${SECRETKEY}
+      REGISTRY_AUTH: ${REGISTRY_AUTH}
+      REGISTRY_IP: ${REGISTRY_IP}
+      REGISTRY_PORT: '${REGISTRY_PORT}'
+      REGISTRY_INSCURE: '${REGISTRY_INSCURE}'
+      SMTP_SSL: '${SMTP_SSL}'
+      SMTP_PORT: '${SMTP_PORT}'
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      LDAP_URL: ${LDAP_URL}
+      LDAP_SEARACHBASE: ${LDAP_SEARACHBASE}
+      LDAP_USER: ${LDAP_USER}
+      LDAP_PASSWORD: ${LDAP_PASSWORD}
+      LDAP_TIMEOUT: '${LDAP_TIMEOUT}'
+      FORCE_INIT: '${FORCE_INIT}'
+      TOKEN_EXPIRY: '${TOKEN_EXPIRY}'
     stdin_open: true
     tty: true
     links:
-    - jenkins-master:jenkins-master
     - jenkins-master:jenkins-master
     ports:
     - 8100:8100/tcp
     labels:
       io.rancher.container.pull_image: always
   jenkins-master:
-    image: wh-cicd/jenkis-master:20170915
+    image: wh-cicd/jenkis-master
     stdin_open: true
     volumes:
     - /var/jenkins_home
