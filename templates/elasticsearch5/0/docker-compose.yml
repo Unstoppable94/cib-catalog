@@ -4,7 +4,7 @@ services:
     image: winhong/wh-elasticsearch
     stdin_open: true
     volumes:
-    - /var/lib/winhong/elasticsearch/master-data:/usr/share/elasticsearch/data:z
+    - /var/lib/winhong/elasticsearch/master-data:/usr/share/elasticsearch/data
     tty: true
     labels:
       io.rancher.container.hostname_override: container_name
@@ -17,7 +17,7 @@ services:
       XPACK_SECURITY_ENABLED: 'true'
     stdin_open: true
     volumes:
-    - /var/lib/winhong/elasticsearch/client-data:/usr/share/elasticsearch/data:z
+    - /var/lib/winhong/elasticsearch/client-data:/usr/share/elasticsearch/data
     tty: true
     ports: 
     - 9200:9200/tcp
