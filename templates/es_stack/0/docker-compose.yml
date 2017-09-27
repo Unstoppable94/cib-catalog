@@ -1,19 +1,5 @@
 version: '2'
 services:
-  elasticsearch-masters:
-    image: winhong/wh-elasticsearch
-    stdin_open: true
-    user: root
-    volumes:
-    - /var/lib/winhong/elasticsearch/master-data:/usr/share/elasticsearch/data:z
-    - /root/es-test/jvm-es-stack.options:/usr/share/elasticsearch/config/jvm.options
-    - /root/es-test/elasticsearch.tmpl:/etc/confd/templates/elasticsearch.tmpl
-    tty: true
-    labels:
-      io.rancher.container.hostname_override: container_name
-      io.rancher.container.pull_image: always
-      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=elasticsearch-masters
-      io.rancher.scheduler.affinity:host_label: usage=log
   elasticsearch-clients:
     image: winhong/wh-elasticsearch
     environment:
