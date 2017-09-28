@@ -24,7 +24,7 @@ services:
       io.rancher.container.pull_image: always
   jenkins-client:
     privileged: true
-    image: wh-cicd/jenkis-slave:20170921
+    image: wh-cicd/jenkis-slave
     environment:
       JENKINS_MASTER: http://jenkins-master:8080
       REGISTRY_AUTH: ${REGISTRY_AUTH}
@@ -41,8 +41,8 @@ services:
     - jenkins-master:jenkins-master
     labels:
       io.rancher.container.pull_image: always
-  wingrow:
-    image: wingrow/wingrow:20170922
+  wingrow-backend:
+    image: wingrow/wingrow
     environment:
       SONAR_URL: HTTP://sonar:8080
       SONAR_USER: wingrow
