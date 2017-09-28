@@ -22,7 +22,7 @@ services:
     - 3306:3306/tcp
     labels:
       io.rancher.container.pull_image: always
-  jenkins-client:
+  jenkins-slave:
     privileged: true
     image: wh-cicd/jenkis-slave
     environment:
