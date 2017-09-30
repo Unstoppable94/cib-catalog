@@ -9,7 +9,6 @@
       label: "Cluster name"
       description: "Name of the Elasticsearch Cluster"
       default: "es-cluster"
-
     - variable: "UPDATE_SYSCTL"
       label: "Update host sysctl:"
       description: |
@@ -21,20 +20,18 @@
       options:
       - false
       - true
-
     - variable: "client_heap_size"
       type: "string"
       required: true
       label: "Heap size (client nodes)"
       description: "Heap size to be allocated for Java (client nodes)"
       default: "6g"
-
     - variable: "client_mem_limit"
       type: "int"
       required: true
       label: "Memory limit in byte (master nodes)"
       description: "Memory limit in Byte per elasticsearch container. AT LEAST double the heap size!defaule 14G (client nodes)"
-      default: 15032385536
+      default: 1073741824
     - variable: "initial_client_nodes"
       type: "int"
       required: true
