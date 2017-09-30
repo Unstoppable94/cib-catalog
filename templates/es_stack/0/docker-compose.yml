@@ -22,7 +22,7 @@ services:
       {{- end}}
     environment:
       - "cluster.name=${cluster_name}"
-      - "node.name=$${HOSTNAME}"
+      - "node.name=$${container_name}"
       - "ES_JAVA_OPTS=-Xms${client_heap_size} -Xmx${client_heap_size}"
       - "discovery.zen.ping.unicast.hosts=elasticsearch-clients"
       - "discovery.zen.minimum_master_nodes=${minimum_master_nodes}"
