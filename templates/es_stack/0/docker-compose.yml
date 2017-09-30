@@ -1,7 +1,7 @@
 version: '2'
 services:
   elasticsearch-clients:
-    image: winhong/wh-elasticsearch
+    image: winhong/es-stack
     environment:
       XPACK_SECURITY_ENABLED: 'true'
     stdin_open: true
