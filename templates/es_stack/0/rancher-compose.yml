@@ -31,7 +31,7 @@
       required: true
       label: "Memory limit in byte (master nodes)"
       description: "Memory limit in Byte per elasticsearch container. AT LEAST double the heap size!defaule 14G (client nodes)"
-      default: 1
+      default: 15032385536
     - variable: "initial_client_nodes"
       type: "int"
       required: true
